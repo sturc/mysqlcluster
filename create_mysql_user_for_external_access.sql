@@ -1,0 +1,9 @@
+CREATE USER 'mysql'@'localhost' IDENTIFIED BY 'mysql';
+
+GRANT ALL PRIVILEGES ON *.* TO 'mysql'@'localhost' WITH GRANT OPTION;
+
+CREATE USER 'mysql'@'%' IDENTIFIED BY 'mysql';
+
+GRANT ALL PRIVILEGES ON *.* TO 'mysql'@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
