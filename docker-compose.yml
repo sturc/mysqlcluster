@@ -1,0 +1,97 @@
+version: '3'
+services:
+  management1:
+    image: mysql/mysql-cluster
+    volumes:
+      - ./my.cnf:/etc/my.cnf
+      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf 
+      - ./healthcheck.sh:/healthcheck.sh
+    command: ndb_mgmd
+    container_name: management1
+    networks:
+      cluster:
+        ipv4_address: "192.168.10.2"
+  ndb1:
+    image: mysql/mysql-cluster
+    volumes:
+      - ./my.cnf:/etc/my.cnf
+      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf 
+      - ./healthcheck.sh:/healthcheck.sh
+    command: ndbd
+    container_name: ndb1
+    depends_on:
+      - management1
+    networks:
+      cluster:
+        ipv4_address: "192.168.10.3"      
+  ndb2:
+    image: mysql/mysql-cluster
+    volumes:
+      - ./my.cnf:/etc/my.cnf
+      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf 
+      - ./healthcheck.sh:/healthcheck.sh
+    command: ndbd
+    container_name: ndb2
+    depends_on:
+      - management1
+    networks:
+      cluster:
+        ipv4_address: "192.168.10.4"
+  ndb3:
+    image: mysql/mysql-cluster
+    volumes:
+      - ./my.cnf:/etc/my.cnf
+      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf 
+      - ./healthcheck.sh:/healthcheck.sh
+    command: ndbd
+    container_name: ndb3
+    depends_on:
+      - management1
+    networks:
+      cluster:
+        ipv4_address: "192.168.10.5"  
+  ndb4:
+    image: mysql/mysql-cluster
+    volumes:
+      - ./my.cnf:/etc/my.cnf
+      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf 
+      - ./healthcheck.sh:/healthcheck.sh
+    command: ndbd
+    container_name: ndb4
+    depends_on:
+      - management1
+    networks:
+      cluster:
+        ipv4_address: "192.168.10.6"       
+  mysql1:
+    image: mysql/mysql-cluster
+    volumes:
+      - ./my.cnf:/etc/my.cnf
+      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf 
+      - ./healthcheck.sh:/healthcheck.sh
+      - ./MASTERDB_2008.sql:/opt/MASTERDB_2008.sql
+      - ./DB_GEN_UPDATE.sql:/opt/DB_GEN_UPDATE.sql
+      - ./create_mysql_user_for_external_access.sql:/opt/create_mysql_user_for_external_access.sql
+      - ./init_hhdemodb.sql:/docker-entrypoint-initdb.d/init_hhdemodb.sql
+    command: mysqld
+    container_name: mysql1
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: MyNewPass
+      MYSQL_DATABASE: hhdemodb
+    depends_on:
+      - ndb1
+      - ndb2
+      - ndb3
+      - ndb4
+    networks:
+      cluster:
+        ipv4_address: "192.168.10.10"                         
+networks:
+  cluster:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet:  192.168.10.0/24
