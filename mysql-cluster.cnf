@@ -3,8 +3,6 @@
 [ndbd default]
 NoOfReplicas=2
 DataMemory=80M
-# IndexMemory=18M
-
 
 [ndb_mgmd]
 NodeId=1
@@ -39,5 +37,4 @@ hostname=192.168.10.10
 NodeId=7
 hostname=192.168.10.7
 
-[mysqld] 
-
+[mysqld]

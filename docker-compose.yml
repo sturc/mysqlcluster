@@ -4,8 +4,7 @@ services:
     image: mysql/mysql-cluster
     volumes:
       - ./my.cnf:/etc/my.cnf
-      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf 
-      - ./healthcheck.sh:/healthcheck.sh
+      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf
     command: ndb_mgmd
     container_name: management1
     networks:
@@ -15,8 +14,7 @@ services:
     image: mysql/mysql-cluster
     volumes:
       - ./my.cnf:/etc/my.cnf
-      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf 
-      - ./healthcheck.sh:/healthcheck.sh
+      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf
     command: ndbd
     container_name: ndb1
     depends_on:
@@ -28,8 +26,7 @@ services:
     image: mysql/mysql-cluster
     volumes:
       - ./my.cnf:/etc/my.cnf
-      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf 
-      - ./healthcheck.sh:/healthcheck.sh
+      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf
     command: ndbd
     container_name: ndb2
     depends_on:
@@ -41,8 +38,7 @@ services:
     image: mysql/mysql-cluster
     volumes:
       - ./my.cnf:/etc/my.cnf
-      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf 
-      - ./healthcheck.sh:/healthcheck.sh
+      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf
     command: ndbd
     container_name: ndb3
     depends_on:
@@ -54,8 +50,7 @@ services:
     image: mysql/mysql-cluster
     volumes:
       - ./my.cnf:/etc/my.cnf
-      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf 
-      - ./healthcheck.sh:/healthcheck.sh
+      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf
     command: ndbd
     container_name: ndb4
     depends_on:
@@ -67,8 +62,7 @@ services:
     image: mysql/mysql-cluster
     volumes:
       - ./my.cnf:/etc/my.cnf
-      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf 
-      - ./healthcheck.sh:/healthcheck.sh
+      - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf
       - ./MASTERDB_2008.sql:/opt/MASTERDB_2008.sql
       - ./DB_GEN_UPDATE.sql:/opt/DB_GEN_UPDATE.sql
       - ./create_mysql_user_for_external_access.sql:/opt/create_mysql_user_for_external_access.sql
