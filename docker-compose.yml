@@ -1,7 +1,7 @@
 version: '3'
 services:
   management1:
-    image: mysql/mysql-cluster
+    image: container-registry.oracle.com/mysql/community-cluster:8.4
     volumes:
       - ./my.cnf:/etc/my.cnf
       - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf
@@ -11,7 +11,7 @@ services:
       cluster:
         ipv4_address: "192.168.10.2"
   ndb1:
-    image: mysql/mysql-cluster
+    image: container-registry.oracle.com/mysql/community-cluster:8.4
     volumes:
       - ./my.cnf:/etc/my.cnf
       - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf
@@ -23,7 +23,7 @@ services:
       cluster:
         ipv4_address: "192.168.10.3"      
   ndb2:
-    image: mysql/mysql-cluster
+    image: container-registry.oracle.com/mysql/community-cluster:8.4
     volumes:
       - ./my.cnf:/etc/my.cnf
       - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf
@@ -35,7 +35,7 @@ services:
       cluster:
         ipv4_address: "192.168.10.4"
   ndb3:
-    image: mysql/mysql-cluster
+    image: container-registry.oracle.com/mysql/community-cluster:8.4
     volumes:
       - ./my.cnf:/etc/my.cnf
       - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf
@@ -47,7 +47,7 @@ services:
       cluster:
         ipv4_address: "192.168.10.5"  
   ndb4:
-    image: mysql/mysql-cluster
+    image: container-registry.oracle.com/mysql/community-cluster:8.4
     volumes:
       - ./my.cnf:/etc/my.cnf
       - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf
@@ -59,7 +59,7 @@ services:
       cluster:
         ipv4_address: "192.168.10.6"       
   mysql1:
-    image: mysql/mysql-cluster
+    image: container-registry.oracle.com/mysql/community-cluster:8.4
     volumes:
       - ./my.cnf:/etc/my.cnf
       - ./mysql-cluster.cnf:/etc/mysql-cluster.cnf
@@ -84,6 +84,7 @@ services:
         ipv4_address: "192.168.10.10"                         
 networks:
   cluster:
+    name: mysqlcluster 
     driver: bridge
     ipam:
       driver: default
