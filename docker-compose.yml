@@ -84,7 +84,7 @@ services:
         ipv4_address: "192.168.10.10"                         
 networks:
   cluster:
-    name: mysqlcluster 
+#    name: mysqlcluster 
     driver: bridge
     ipam:
       driver: default
